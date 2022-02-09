@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><i class="oi oi-caret-right"></i>
+						<span>Cadastrar Veiculos</span></li>
+				</ul>
+				<a class="btn btn-primary btn-md" th:href="@{/home}"
+					role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
+					aria-hidden="true"></span> <span>Voltar</span>
+				</a>
+				<a class="btn btn-primary btn-md" href="/veiculos/listar"
+					role="button"> <span class="oi oi-spreadsheet" title="Listar"
+					aria-hidden="true"></span> <span>Listar Veiculos</span>
+				</a>
+			</div>
+		</nav>
+
+
+		<div class="container" id="cadastro">
+
+			<div th:replace="fragments/alert"></div>
+
+			<form
+				th:action="${veiculo.id} == null ? @{/veiculos/salvar} : @{/veiculos/editar}"
+				th:object="${veiculo}" method="POST">
+
+				<div th:replace="fragments/validator :: validator"></div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="marca">Marca</label> <input type="text"
+							class="form-control" id="marca" placeholder="Nome da Marca"
+							autofocus="autofocus" th:field="*{marca}" 
+							th:classappend="${#fields.hasErrors('marca')} ? 'is-invalid'" />
+						<div class="invalid-feedback">
+							<span th:errors="*{marca}"></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="placa">Placa</label> <input type="text"
+							class="form-control" id="placa" placeholder="Placa do Veículo"
+							autofocus="autofocus" th:field="*{placa}"
+							th:classappend="${#fields.hasErrors('placa')} ? 'is-invalid'" />
+						<div class="invalid-feedback">
+							<span th:errors="*{placa}"></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="marca">Renavam</label> <input type="text"
+							class="form-control" id="renavam"
+							placeholder="Renavam do Veiculo" autofocus="autofocus"
+							th:field="*{renavam}" 
+							th:classappend="${#fields.hasErrors('renavam')} ? 'is-invalid'" />
+						<div class="invalid-feedback">
+							<span th:errors="*{renavam}"></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="marca">Capacidade</label> <input type="number"
+							class="form-control" id="capacidade"
+							placeholder="Capacidade de Passageiros" autofocus="autofocus"
+							th:field="*{capacidade}" 
+							th:classappend="${#fields.hasErrors('capacidade')} ? 'is-invalid'" />
+						<div class="invalid-feedback">
+							<span th:errors="*{capacidade}"></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="marca">Tipo</label> <input type="text"
+							class="form-control" id="tipo" placeholder="Tipo : Ônibus, Van"
+							autofocus="autofocus" th:field="*{tipo}" 
+							th:classappend="${#fields.hasErrors('tipo')} ? 'is-invalid'" />
+						<div class="invalid-feedback">
+							<span th:errors="*{tipo}"></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="marca">Status</label> <input type="text"
+							class="form-control" id="status" placeholder="Status do Veículo"
+							autofocus="autofocus" th:field="*{status}" 
+							th:classappend="${#fields.hasErrors('status')} ? 'is-invalid'" />
+						<div class="invalid-feedback">
+							<span th:errors="*{status}"></span>
+						</div>
+					</div>
+				</div>
+
+				<input type="hidden" id="id" th:field="*{id}" />
+				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

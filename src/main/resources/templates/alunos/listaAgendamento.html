@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><i class="oi oi-caret-right"></i>
+						<span>Minha Agenda</span></li>
+				</ul>
+			</div>
+			<a class="btn btn-primary btn-md" th:href="@{/home}" role="button">
+				<span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
+				<span>Voltar</span>
+			</a> <a class="btn btn-primary btn-md"
+				href="/agendaTransportes/cadastrar" role="button"> <span
+				class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> <span>Novo
+					Agendamento</span>
+			</a>
+		</nav>
+		
+		<div class="container" id="listagem">
+
+			<div th:replace="fragments/alert"></div>
+			
+			<div class="table-responsive">
+				<table class="table table-striped table-hover table-sm">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Dia Semana</th>
+							<th>Aluno</th>
+							<th>Endereço</th>
+							<th>Escola</th>
+							<th>Ação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="a : ${agendaTransporte}">
+							<td th:text="${a.id}">1</td>
+							<td th:text="${a.diaSemana.nome}">Contabilidade</td>
+							<td th:text="${a.aluno.nomePessoa}">Contabilidade</td>
+							<td>
+								<button type="button" class="btn btn-secondary btn-sm"
+									data-container="body" data-toggle="popover"
+									data-placement="right"
+									th:attr="data-content=${#strings.concat(
+	                                    		a.aluno.endereco.logradouro, ', ',
+	                                    		a.aluno.endereco.numero, ' ',
+	                                    		a.aluno.endereco.complemento, ' - ',
+	                                    		a.aluno.endereco.bairro, ', ',
+	                                    		a.aluno.endereco.cidade, ' - ',
+	                                    		a.aluno.endereco.uf.sigla, ' - ',
+	                                    		a.aluno.endereco.cep
+	                                    		)}">
+
+									<span class="oi oi-eye" title="Visualizar" aria-hidden="true"></span>
+								</button>
+							</td>
+							<td th:text="${a.aluno.escola.nomeEscola}">Contabilidade</td>
+							<td colspan="2"><a class="btn btn-info btn-sm"
+								th:href="@{/agendaTransportes/editar/{id} (id=${a.id}) }"
+								role="button"> <span class="oi oi-brush" title="Editar"
+									aria-hidden="true"></span>
+							</a>
+								<button
+									th:id="${#strings.concat('btn_agendaTransportes/excluir/', a.id)}"
+									type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+									data-target="#myModal">
+									<span class="oi oi-circle-x" title="Exclusão desabilitada"
+										aria-hidden="true"></span>
+								</button></td>
+						</tr>
+						</tr>
+					</tbody>
+				</table>
+				
+			<!-- 	<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li class="page-item"><a class="page-link"
+							th:href="@{/agendaTransportes/listar(page=${1})}" tabindex="-1"><<
+						</a></li>
+						<li
+							th:class="${pageAgendaTransporte.pagina == 1} ? 'page-item disabled' : 'page-item'">
+							<a class="page-link"
+							th:href="@{/agendasTransportes/listar(page=${pageAgendaTransporte.pagina - 1})}"
+							tabindex="-1">Prev</a>
+						</li>
+						<li class="page-item"><span class="page-link"
+							th:text="|${pageAgendaTransporte.pagina} de ${pageAgendaTransporte.totalPaginas}|"></span>
+						</li>
+						<li
+							th:class="${pageAgendaTransporte.pagina == pageAgendaTransporte.totalPaginas} ? 'page-item disabled' : 'page-item'">
+							<a class="page-link"
+							th:href="@{/agendaTransportes/listar(page=${pageAgendaTransporte.pagina + 1})}"
+							tabindex="-1">Next</a>
+						</li>
+						<li class="page-item"><a class="page-link"
+							th:href="@{/agendaTransportes/listar(page=${pageAgendaTransporte.totalPaginas})}"
+							tabindex="-1"> >></a></li>
+					</ul>
+				</nav> -->
+			</div>
+		</div>
+		
+		<div th:replace="fragments/modal :: modal"></div>
+		</div>
+	</section>
+</body>
+</html>

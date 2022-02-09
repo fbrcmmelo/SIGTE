@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><i class="oi oi-caret-right"></i>
+						<span>Agendar Transporte</span></li>
+				</ul>
+			</div>
+			<a class="btn btn-primary btn-md" th:href="@{/home}"
+					role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
+					aria-hidden="true"></span> <span>Voltar</span>
+				</a>
+			<a class="btn btn-primary btn-md" href="/transportes/listar"
+				role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
+				aria-hidden="true"></span> <span>Listar Transportes</span>
+			</a>
+		</nav>
+
+		<div class="container" id="cadastro">
+
+			<div th:replace="fragments/alert"></div>
+
+			<form
+				th:action="${transporte.id == null} ? @{/transportes/salvar} : @{/transportes/editar}"
+				th:object="${transporte}" method="POST">
+
+				<div th:replace="fragments/validator :: validator"></div>
+
+				<div class="form-group col-md-4">
+					<label for="veiculo">Escolha o Veiculo</label> <select id="veiculo"
+						class="form-control" th:field="*{veiculo}">
+						<option value="">Selecione</option>
+						<option th:each="v : ${veiculos}" th:value="${v.id}"
+							th:text="${v.marca}">Administração</option>
+					</select>
+				</div>
+
+				<div class="form-group col-md-4">
+					<label for="escola">Escolha a Escola</label> <select id="escola"
+						class="form-control" th:field="*{escola}">
+						<option value="">Selecione</option>
+						<option th:each="e : ${escolas}" th:value="${e.id}"
+							th:text="${e.nomeEscola}">Administração</option>
+					</select>
+				</div>
+
+				<div class="form-group col-md-4">
+					<label for="funcionario">Motorista</label> <select id="funcionario"
+						class="form-control" th:field="*{funcionario}">
+						<option value="">Selecione</option>
+						<option th:each="f : ${funcionarios}" th:value="${f.idPessoa}"
+							th:text="${f.nomePessoa}">Administração</option>
+					</select>
+				</div>
+				
+				<div class="form-group col-md-4">
+					<label for="Dia da Semana">Dia de Aula na Semana</label> <select
+						id="diaSemana" class="form-control" th:field="*{diaSemana}">
+						<option value="">Selecione</option>
+						<option th:each="d : ${diaSemana}" th:value="${d.id}"
+							th:text="${d.nome}">Administração</option>
+					</select>
+				</div>
+
+				<input type="hidden" th:field="*{id}" />
+				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

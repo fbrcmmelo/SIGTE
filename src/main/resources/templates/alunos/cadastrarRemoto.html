@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>SIGTE- SISTEMA PARA GESTÃO DO TRANSPORTE ESCOLAR</title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" href="/image/schoolbus.png" />
+
+<!-- Bootstrap core CSS -->
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="/css/login.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="container-cadastro-aluno" id="cadastro">
+		<h2 align="center">Cadastros de Alunos no Sigte</h2>
+		<hr>
+		<div th:replace="fragments/alert"></div>
+		<form
+			th:action="${aluno.idPessoa == null} ? @{/alunos/salvarRemoto} : @{/alunos/editarRemoto}"
+			th:object="${aluno}" method="POST">
+
+			<div th:replace="fragments/validator :: validator"></div>
+
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="nomePessoa">Nome do Aluno</label> <input type="text"
+						class="form-control" id="nome" placeholder="Nome Completo"
+						autofocus="autofocus" th:field="*{nomePessoa}"
+						th:classappend="${#fields.hasErrors('nomePessoa')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{nomePessoa}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="emailPessoa">Email</label> <input type="text"
+						class="form-control" id="emailPessoa"
+						placeholder="Email para Login" autofocus="autofocus"
+						th:field="*{emailPessoa}"
+						th:classappend="${#fields.hasErrors('emailPessoa')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{emailPessoa}"></span>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="senhaPessoa">Senha</label> <input type="password"
+						class="form-control" id="senhaPessoa"
+						placeholder="Senha para Login" autofocus="autofocus"
+						th:field="*{senhaPessoa}"
+						th:classappend="${#fields.hasErrors('senhaPessoa')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{senhaPessoa}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="rgPessoa">RG</label> <input type="text"
+						class="form-control" id="rgPessoa"
+						placeholder="Insira o número do RG" autofocus="autofocus"
+						th:field="*{rgPessoa}" data-mask="00.000.000-0"
+						th:classappend="${#fields.hasErrors('rgPessoa')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{rgPessoa}"></span>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="dataNascimento">Data de Nascimento</label> <input
+						type="date" class="form-control" id="dataNascimento"
+						th:field="*{dataNascimento}"
+						th:classappend="${#fields.hasErrors('dataNascimento')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{dataNascimento}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="grauEscolar">Grau Escolar</label> <input type="text"
+						placeholder="Ensino Fundamental, Médio, Superior .."
+						class="form-control" id="grauEscolar" th:field="*{grauEscolar}"
+						th:classappend="${#fields.hasErrors('grauEscolar')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{grauEscolar}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="cidade">Cidade</label> <input type="text"
+						class="form-control" id="cidade" th:field="*{endereco.cidade}"
+						th:classappend="${#fields.hasErrors('endereco.cidade')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{endereco.cidade}"></span>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="logradouro">Logradouro</label> <input type="text"
+						class="form-control" id="logradouro"
+						placeholder="logradouro sem número"
+						th:field="*{endereco.logradouro}"
+						th:classappend="${#fields.hasErrors('endereco.logradouro')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{endereco.logradouro}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="numero">Número</label> <input type="text"
+						class="form-control" id="numero" th:field="*{endereco.numero}"
+						th:classappend="${#fields.hasErrors('endereco.numero')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{endereco.numero}"></span>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="complemento">Complemento</label> <input type="text"
+						class="form-control" id="complemento"
+						placeholder="fundos, casa, AP. 102, .."
+						th:field="*{endereco.complemento}"
+						th:classappend="${#fields.hasErrors('endereco.complemento')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{endereco.complemento}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="bairro">Bairro</label> <input type="text"
+						class="form-control" id="bairro" th:field="*{endereco.bairro}"
+						th:classappend="${#fields.hasErrors('endereco.bairro')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{endereco.bairro}"></span>
+					</div>
+				</div>
+				<div class="form-group col-md-4">
+					<label for="uf">UF</label> <select id="uf" class="form-control"
+						th:field="*{endereco.uf}"
+						th:classappend="${#fields.hasErrors('endereco.uf')} ? 'is-invalid'">
+						<option value="">Selecione...</option>
+						<option th:each="uf : ${ufs}" th:value="${uf}"
+							th:text="${uf.sigla}">AC</option>
+					</select>
+					<div class="invalid-feedback">
+						<span th:errors="*{endereco.uf}"></span>
+					</div>
+				</div>
+				<div class="form-group col-md-2">
+					<label for="cep">Cep</label> <input type="text"
+						class="form-control" id="cep" data-mask="00000-000"
+						th:field="*{endereco.cep}"
+						th:classappend="${#fields.hasErrors('endereco.cep')} ? 'is-invalid'" />
+					<div class="invalid-feedback">
+						<span th:errors="*{endereco.cep}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label for="escola">Escola</label> <select id="escola"
+						class="form-control" th:field="*{escola}"
+						th:classappend="${#fields.hasErrors('escola')} ? 'is-invalid'">
+						<option value="">Selecione...</option>
+						<option th:each="e : ${escolas}" th:value="${e.id}"
+							th:text="${e.nomeEscola}">Auxiliar Contábil</option>
+					</select>
+					<div class="invalid-feedback">
+						<span th:errors="*{escola}"></span>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" id="idPessoa" th:field="*{idPessoa}" /> <input
+				type="hidden" id="endereco.id" th:field="*{endereco.id}" />
+			<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+			<button type="reset" class="btn btn-primary btn-sm">Limpar</button>
+		</form>
+		<a class="btn btn-primary btn-md" th:href="@{/}" role="button">
+			<span class="oi oi-arrow-thick-left" title="Voltar" aria-hidden="true"></span>
+			<span>Voltar</span>
+		</a>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		var url = "";
+
+		$('button[id*="btn_"]').click(function() {
+			url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
+		});
+
+		$('#ok_confirm').click(function() {
+			document.location.href = url;
+		});
+
+		$(function() {
+			$('[data-toggle="popover"]').popover();
+		});
+
+		$(document).ready(function() {
+			$(".navbar-toggle").click(function() {
+				$(".sidebar").toggleClass("sidebar-open");
+			})
+		});
+	</script>
+</body>
+</html>
