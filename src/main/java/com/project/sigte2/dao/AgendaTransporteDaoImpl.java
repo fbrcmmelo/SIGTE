@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.project.sigte2.domain.AgendaTransporte;
-import com.project.sigte2.domain.Aluno;
 import com.project.sigte2.util.PaginacaoUtil;
 
 @Repository

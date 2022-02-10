@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.sigte2.domain.DiasAlunosAulas;
-import com.project.sigte2.service.DiaAlunosAulasService;
+import com.project.sigte2.service.DiasAlunosAulasService;
 
 @Controller
 @RequestMapping("/diasAlunosAulas")
 public class DiasAlunosAulasController {
 
 	@Autowired
-	private DiaAlunosAulasService service;
+	private DiasAlunosAulasService service;
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(DiasAlunosAulas diasAlunosAulas, ModelMap model, HttpServletRequest request) {

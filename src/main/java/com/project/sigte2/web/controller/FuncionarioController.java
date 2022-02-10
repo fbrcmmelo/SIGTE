@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.project.sigte2.domain.Funcionario;
 import com.project.sigte2.domain.Cargo;
+import com.project.sigte2.domain.Funcionario;
 import com.project.sigte2.domain.UF;
 import com.project.sigte2.service.CargoService;
 import com.project.sigte2.service.FuncionarioService;

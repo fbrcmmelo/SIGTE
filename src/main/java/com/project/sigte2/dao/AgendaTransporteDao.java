@@ -3,7 +3,6 @@ package com.project.sigte2.dao;
 import java.util.List;
 
 import com.project.sigte2.domain.AgendaTransporte;
-import com.project.sigte2.domain.Aluno;
 import com.project.sigte2.util.PaginacaoUtil;
 
 public interface AgendaTransporteDao {

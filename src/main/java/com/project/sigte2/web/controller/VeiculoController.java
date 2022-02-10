@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.project.sigte2.domain.Administrador;
 import com.project.sigte2.domain.Veiculo;
 import com.project.sigte2.service.VeiculoService;
 

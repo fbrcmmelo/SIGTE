@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.sigte2.dao.AgendaTransporteDao;
 import com.project.sigte2.domain.AgendaTransporte;
-import com.project.sigte2.domain.Aluno;
 import com.project.sigte2.util.PaginacaoUtil;
 
 @Service

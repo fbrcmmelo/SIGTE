@@ -10,7 +10,7 @@ import com.project.sigte2.dao.DiasAlunosAulaDao;
 import com.project.sigte2.domain.DiasAlunosAulas;
 
 @Service @Transactional(readOnly = false)
-public class DiasAlunosAulasServiceImpl implements DiaAlunosAulasService{
+public class DiasAlunosAulasServiceImpl implements DiasAlunosAulasService{
 	
 	@Autowired
 	private DiasAlunosAulaDao dao;

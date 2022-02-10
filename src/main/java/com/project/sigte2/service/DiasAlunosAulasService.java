@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.project.sigte2.domain.DiasAlunosAulas;
 
-public interface DiaAlunosAulasService {
+public interface DiasAlunosAulasService {
 
 	void salvar(DiasAlunosAulas diaAula);
 
